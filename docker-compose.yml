@@ -1,0 +1,13 @@
+services:
+  postgres:
+    container_name: cred-it-pg
+    image: bitnami/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_USERNAME: docker
+      POSTGRESQL_PASSWORD: docker
+      POSTGRESQL_DATABASE: cred-it
+      PGDATA: /data/postgres
+    volumes:
+      - ./data/pg:/data/postgres
