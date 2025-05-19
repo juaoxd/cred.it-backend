@@ -41,4 +41,14 @@ describe('Register use case', () => {
       }),
     ).rejects.toBeInstanceOf(EmailAlreadyInUseError)
   })
+
+  it('should hash user password', async () => {
+    const { user } = await sut.execute({
+      name: 'John Doe',
+      email: 'johndoe@email.com',
+      password: '123456',
+    })
+
+    expect(user.passwordHash).not.toEqual('123456')
+  })
 })
