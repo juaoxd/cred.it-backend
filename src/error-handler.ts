@@ -1,6 +1,6 @@
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { z, ZodError } from 'zod/v4'
-import { EmailAlreadyInUseError } from './modules/users/errors/email-already-in-use-error'
+import { ApplicationError } from './application-error'
 
 export async function errorHandler(
   error: FastifyError,
@@ -15,10 +15,10 @@ export async function errorHandler(
     })
   }
 
-  if (error instanceof EmailAlreadyInUseError) {
-    return reply.status(409).send({
-      statusCode: 409,
-      message: 'E-mail already in use.',
+  if (error instanceof ApplicationError) {
+    return reply.status(error.statusCode).send({
+      statusCode: error.statusCode,
+      message: error.message,
     })
   }
 

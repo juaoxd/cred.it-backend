@@ -1,5 +1,7 @@
-export class EmailAlreadyInUseError extends Error {
+import { ApplicationError } from '../../../application-error'
+
+export class EmailAlreadyInUseError extends ApplicationError {
   constructor() {
-    super('E-mail already in use.')
+    super(409, 'E-mail already in use.')
   }
 }
